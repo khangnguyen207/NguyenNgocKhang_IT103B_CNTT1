@@ -13,12 +13,12 @@ const showProducts = () => {
 
   let newProducts = products
     .map((product, index) => {
-      return `<li class = "product">${product.id}: ${product.name} - ${product.price} VNĐ <button class="delete-btn" onclick = deleteProduct(${index})>Xóa</button></li>`;
+      return `<li class = "product">${product.id}: ${product.name} - ${product.price} VNĐ <button class="delete-btn" onclick = deleteProduct(${index})>Xóa</button> <button class="edit-price-btn" onclick = handleEdit(${index})>Sửa giá</button></li>`;
     })
     .join("");
 
-    let ul = document.getElementById("product-list");
-    ul.style.listStyle = "none"
+  let ul = document.getElementById("product-list");
+  ul.style.listStyle = "none";
 
   productList.innerHTML = newProducts;
 };
@@ -55,8 +55,31 @@ const addNewProduct = () => {
 addNewProduct();
 
 const deleteProduct = (index) => {
-    if (confirm("Bạn có chắc muốn xóa sản phẩm này?")) {
-        products.splice(index, 1);
-        showProducts();
-    }
+  if (confirm("Bạn có chắc muốn xóa sản phẩm này?")) {
+    products.splice(index, 1);
+    showProducts();
+  }
+};
+
+const handleEdit = (index) => {
+  let newPrice = +prompt("Nhập Giá mới");
+  products[index].price = newPrice;
+  showProducts();
+};
+
+const searchInput = document.getElementById("search-input");
+const handleSearch = () => {
+  searchInput.addEventListener("input", () => {
+    let valueSearch = searchInput.value.toLocaleLowerCase().trim();
+    let productItemAll = document.querySelectorAll(".product");
+
+    productItemAll.forEach((product) => {
+      if (product.textContent.toLocaleLowerCase().includes(valueSearch)) {
+        product.style.display = "block";
+      } else {
+        product.style.display = "none";
+      }
+    });
+  });
 }
+searchInput.addEventListener("input", handleSearch);

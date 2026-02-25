@@ -37,7 +37,10 @@ let productList = document.getElementById('product-list');
 productList.innerHTML = ""; //tạo  mảng rỗng
 
 let newProducts = products.map((product) => {
-    return `<div class = "product">${product.id}: ${product.name} - ${product.price} VNĐ </div>`
+    return `<li class = "product">${product.id}: ${product.name} - ${product.price} VNĐ </li>`
 }).join("");
+
+let ul = document.getElementById("product-list");
+ul.style.listStyle = "none"
 
 productList.innerHTML = newProducts;

@@ -25,29 +25,32 @@ showProducts();
 let form = document.getElementById("product-form");
 
 const addNewProduct = () => {
-    form.addEventListener("submit", (event) => {
-  event.preventDefault(); //ngăn hành vi mặc định
+  form.addEventListener("submit", (event) => {
+    event.preventDefault(); //ngăn hành vi mặc định
 
-  //lấy dữ liệu
-  const formData = new FormData(form);
-  const name = formData.get("input-name").trim();
-  const price = Number(formData.get("input-price").trim());
+    //lấy dữ liệu
+    const formData = new FormData(form);
+    const name = formData.get("input-name").trim();
+    const price = Number(formData.get("input-price").trim());
 
-  if (!name || !price) {
-    alert("Vui lòng nhập Tên Sản Phẩm hoặc Giá:");
-    return;
-  } else {
-    const newProducts = {
+    if (!name || !price) {
+      alert("Vui lòng nhập Tên Sản Phẩm hoặc Giá:");
+      return;
+    } else {
+      const newProducts = {
         id: products.length + 1,
         name: name,
         price: price,
-    }
-    products.push(newProducts);
-    showProducts(); //cập nhật lại danh sách hiểm thị
+      };
+      
+      products.push(newProducts);
+      form.reset();
+      showProducts(); //cập nhật lại danh sách hiểm thị
 
-    alert(`Dữ liệu đã được xử lý ${name}`);
-    console.log(`Dữ liệu được xử lý: ${name} - ${price}`);
-  }
-});
-}
+      alert(`Dữ liệu đã được xử lý ${name}`);
+      console.log(`Dữ liệu được xử lý: 
+        ${newProducts.id} - ${name} - ${price}(VNĐ)`);
+    }
+  });
+};
 addNewProduct();

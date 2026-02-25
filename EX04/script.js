@@ -13,7 +13,7 @@ const showProducts = () => {
 
   let newProducts = products
     .map((product, index) => {
-      return `<li class = "product">${product.id}: ${product.name} - ${product.price} VNĐ <button class="delete-btn" onclick = deleteProduct(${index})>Xóa</button></li>`;
+      return `<li class = "product">${product.id}: ${product.name} - ${product.price} VNĐ <button class="delete-btn" onclick = deleteProduct(${index})>Xóa</button> <button class="edit-price-btn" onclick = handleEdit(${index})>Sửa giá</button></li>`;
     })
     .join("");
 
@@ -59,4 +59,10 @@ const deleteProduct = (index) => {
         products.splice(index, 1);
         showProducts();
     }
+}
+
+const handleEdit = (index) => {
+  let newPrice = +prompt("Nhập Giá mới");
+  products[index].price = newPrice;
+  showProducts();
 }
